@@ -629,6 +629,7 @@ select  first_name,
         department_id
 from employees
 where department_id in(10,90,100)
+-- REPLACE(str, from_str, to_str): str에서 from_str을 to_str로 변경
 ;
 
 /*문제7.
@@ -642,6 +643,7 @@ where first_name like 'S%' or 's%'
 /*문제8.
 전체 부서를 출력하려고 합니다. 순서는 부서이름이 긴 순서대로 출력해 보세오.*/
 select department_id
+-- char_length
 from employees;
 
 /*문제9.
@@ -660,10 +662,4 @@ from employees
 where hire_date <= 03/12/31
 ;
 -- where hire_date >= '2007-01-01';
-
-
-
-
-
-
 
