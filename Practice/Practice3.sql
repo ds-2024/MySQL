@@ -12,27 +12,7 @@ order by department_name asc, employee_id desc
 -- > 발생수 2889 따라서 중복 제거 해야함 > 부서명이 여러개인 사원이 많음 ex) 106 Valli Treasury, Shipping, Shareholder Services
 -- > 유니크 공통 컬럼으로 join
 ;
-/*모든 직원이름, 부서이름, 업무명 을 출력하세요
 
-select  e.first_name, -- 4. 뽑을거 열거 해주기
-		d.department_id,
-        j.job_title,
-        j.job_id
-from employees e, departments d, jobs j -- 1.from 절에 필요한 테이블 모두 적음
-where e.department_id = d.department_id -- 2. 일반적으로 테이블 개수 -1 개의 조인 조건이 필요
-and e.job_id = j.job_id -- 3. 조건 마무리
-;
-
-select  e.first_name,
-		d.department_name,
-        j.job_title,
-        j.job_id
-from employees e
-inner join departments d
-	on e.department_id = d.department_id
-inner join jobs j
-	on e.job_id = j.job_id
-    ; */
 
 /*문제2.
 employees 테이블의 job_id는 현재의 업무아이디를 가지고 있습니다.
@@ -69,22 +49,22 @@ order by employee_id asc
 도시아이디, 도시명, 부서명, 부서아이디를 도시아이디(오름차순)로 정렬하여 출력하세요
 부서가 없는 도시는 표시하지 않습니다.
 (27건)*/
-select  location_id 도시아이디,
-		city 도시명,
-        department_name 부서명,
-        department_id 부서아이디
+select  l.location_id 도시아이디,
+		l.city 도시명,
+        d.department_name 부서명,
+        d.department_id 부서아이디
 from locations l join departments d
 on l.location_id = d.location_id
-order by location_id asc
+order by l.location_id asc
 ;
 
 /*문제3-1.
 문제3에서 부서가 없는 도시도 표시합니다.*/
 
-select  location_id 도시아이디,
-		city 도시명,
-        department_name 부서명,
-        department_id 부서아이디
+select  l.location_id 도시아이디,
+		l.city 도시명,
+        d.department_name 부서명,
+        d.department_id 부서아이디
 from locations l left join departments d
 on l.location_id = d.location_id
 order by location_id asc
@@ -102,7 +82,7 @@ order by region_name asc , country_name desc
 /*문제5. 
 자신의 매니저보다 채용일(hire_date)이 빠른 사원의
 사번(employee_id), 이름(first_name)과 채용일(hire_date), 매니저이름(first_name), 매니저입
-사일(hire_date)을 조회하세요.
+사일(hire_date)을 조회하세요. -- self join
 (37건)*/
 select  e.employee_id 사번,
 		e.first_name 이름,
